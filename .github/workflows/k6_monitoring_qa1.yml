@@ -7,9 +7,13 @@ on:
 
 env:
   PLAYWRIGHT_CSO_PASSWORD: ${{ secrets.PLAYWRIGHT_TID_PASSWORD }}
-  HTTP_PROXY: "http://198.161.14.25:8080"
-  HTTPS_PROXY: "http://198.161.14.25:8080"
-  NO_PROXY: "localhost,.corp.ads,.oss.ads,.tsl.telus.com,.tmi.telus.com"
+  # Proxy en UPPER + lower
+  HTTP_PROXY:  http://198.161.14.25:8080
+  http_proxy:  http://198.161.14.25:8080
+  HTTPS_PROXY: http://198.161.14.25:8080
+  https_proxy: http://198.161.14.25:8080
+  NO_PROXY:    localhost,127.0.0.1,.corp.ads,.oss.ads,.tsl.telus.com,.tmi.telus.com
+  no_proxy:    localhost,127.0.0.1,.corp.ads,.oss.ads,.tsl.telus.com,.tmi.telus.com
   TZ: "America/Montreal"
 
 jobs:
@@ -21,6 +25,8 @@ jobs:
 
       - name: Setup K6
         uses: grafana/setup-k6-action@v1
+        with:
+          browser: true
       - name: Run local k6 test
         uses: grafana/run-k6-action@v1
         with:
