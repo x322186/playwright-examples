@@ -3,7 +3,7 @@ name: k6 monitoring qa1-np
 on:
   workflow_dispatch:
   schedule:
-   - cron: "0,30 7-18 * * 1-5" #each 30 minutes between 7am and 6:30pm on weekdays
+   - cron: "0,30 11-22 * * 1-5" #each 30 minutes between 7am and 6:30pm on weekdays
 
 env:
   PLAYWRIGHT_CSO_PASSWORD: ${{ secrets.PLAYWRIGHT_CSO_PASSWORD }}
