@@ -77,7 +77,7 @@ export default async function () {
 
   const res = http.get(`${BASE_URL}/event/api/v1/events?page=0&size=25&sort=createdDate%2Cdesc`, {jar: jar, redirects: 0});
   check(res, {'is status 200': (r) => r.status === 200}); //be sure we don't redirect to SSO page
-  //console.log(`Response code: ${res.status}`);
+  console.log(`Response code: ${res.status}`);
 
   sleep(1);
 }
