@@ -40,15 +40,16 @@ jobs:
           if (!(Test-Path $k6Root)) { New-Item -ItemType Directory -Path $k6Root | Out-Null }
           Expand-Archive -Path "k6.zip" -DestinationPath $k6Root -Force
 
-          # Trouve le dossier extrait et met k6.exe dans k6bin pour un PATH simple
+          # Find k6.exe and move in k6bin
           $extractedDir = Get-ChildItem $k6Root -Directory | Select-Object -First 1
           Move-Item -Force (Join-Path $extractedDir.FullName "k6.exe") (Join-Path $k6Root "k6.exe")
 
-          # Ajoute k6bin au PATH pour le reste du job
+          # Add k6bin to PATH for the rest of the job
           "$k6Root" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
       - name: Verify k6
         run: k6 version
 
       - name: Run k6 on event.js
-        run: k6 run perfo/monitoring/event.js
+        run: k6 run perfo/monitoring/events.js
+             
