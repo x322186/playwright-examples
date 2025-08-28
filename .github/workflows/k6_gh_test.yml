@@ -15,4 +15,4 @@ jobs:
       - name: Run local k6 test
         uses: grafana/run-k6-action@v1
         with:
-          path: ./perfo/monitoring/event.js
+          path: ./perfo/monitoring/events.js
