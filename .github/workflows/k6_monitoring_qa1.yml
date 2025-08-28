@@ -6,7 +6,7 @@ on:
   # - cron: '0 10 * * 1-5'  
 
 env:
-  PLAYWRIGHT_CSO_PASSWORD: ${{ secrets.PLAYWRIGHT_TID_PASSWORD }}
+  PLAYWRIGHT_CSO_PASSWORD: ${{ secrets.PLAYWRIGHT_CSO_PASSWORD }}
   # Proxy en UPPER + lower
   #HTTP_PROXY:  http://198.161.14.25:8080
   http_proxy:  http://198.161.14.25:8080

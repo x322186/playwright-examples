@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 env:
-  PLAYWRIGHT_CSO_PASSWORD: ${{ secrets.PLAYWRIGHT_TID_PASSWORD }}
+  PLAYWRIGHT_CSO_PASSWORD: ${{ secrets.PLAYWRIGHT_CSO_PASSWORD }}
 
 jobs:
   protocol:
