@@ -2,8 +2,8 @@ name: k6 monitoring qa1-np
 
 on:
   workflow_dispatch:
-  # schedule:
-  # - cron: '0 10 * * 1-5'  
+  schedule:
+   - cron: "0,30 7-18 * * 1-5" #each 30 minutes between 7am and 6:30pm on weekdays
 
 env:
   PLAYWRIGHT_CSO_PASSWORD: ${{ secrets.PLAYWRIGHT_CSO_PASSWORD }}
@@ -11,7 +11,7 @@ env:
   HTTP_PROXY:  http://198.161.14.25:8080
   HTTPS_PROXY: http://198.161.14.25:8080
   NO_PROXY:    localhost,127.0.0.1,.corp.ads,.oss.ads,.tsl.telus.com,.tmi.telus.com
-  TZ: "America/Montreal"
+  TZ: America/Toronto
 
 jobs:
   run-test:
