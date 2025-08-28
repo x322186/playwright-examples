@@ -14,7 +14,7 @@ env:
 
 jobs:
   run-test:
-    runs-on: ubuntu-latest
+    runs-on: danny-examples
     steps:
       - name: Checkout
         uses: actions/checkout@v4
