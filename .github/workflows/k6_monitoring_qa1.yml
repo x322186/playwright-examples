@@ -20,11 +20,38 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup K6
-        uses: grafana/setup-k6-action@v1
-        with:
-          browser: true
-      - name: Run local k6 test
-        uses: grafana/run-k6-action@v1
-        with:
-          path: perfo/monitoring/event.js
+      #- name: Setup K6
+      #  uses: grafana/setup-k6-action@v1
+      #  with:
+      #    browser: true
+      #- name: Run local k6 test
+      #  uses: grafana/run-k6-action@v1
+      #  with:
+      #    path: perfo/monitoring/event.js
+
+      - name: Download k6 (Windows x64)
+        shell: pwsh
+        run: |
+          $K6_VERSION = "v1.2.3"
+          $zip = "k6-$K6_VERSION-windows-amd64.zip"
+          $url = "https://github.com/grafana/k6/releases/download/$K6_VERSION/$zip"
+
+          Invoke-WebRequest -Uri $url -OutFile "k6.zip"
+          $k6Root = Join-Path $env:GITHUB_WORKSPACE "k6bin"
+          if (!(Test-Path $k6Root)) { New-Item -ItemType Directory -Path $k6Root | Out-Null }
+          Expand-Archive -Path "k6.zip" -DestinationPath $k6Root -Force
+
+          # Trouve le dossier extrait et met k6.exe dans k6bin pour un PATH simple
+          $extractedDir = Get-ChildItem $k6Root -Directory | Select-Object -First 1
+          Move-Item -Force (Join-Path $extractedDir.FullName "k6.exe") (Join-Path $k6Root "k6.exe")
+
+          # Ajoute k6bin au PATH pour le reste du job
+          "$k6Root" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
+      - name: Verify k6
+        shell: pwsh
+        run: k6 version
+
+      - name: Run k6 on event.js
+        shell: pwsh
+        run: k6 run perfo/monitoring/event.js
