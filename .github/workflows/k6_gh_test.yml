@@ -1,6 +1,9 @@
 on:
   workflow_dispatch:
 
+env:
+  PLAYWRIGHT_CSO_PASSWORD: ${{ secrets.PLAYWRIGHT_TID_PASSWORD }}
+
 jobs:
   protocol:
     runs-on: ubuntu-latest
