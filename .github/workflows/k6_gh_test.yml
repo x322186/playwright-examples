@@ -1,3 +1,5 @@
+name: k6 monitoring qa1-np ubuntu no proxy
+
 on:
   workflow_dispatch:
 
