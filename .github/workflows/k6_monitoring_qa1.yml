@@ -48,9 +48,7 @@ jobs:
           "$k6Root" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
       - name: Verify k6
-        shell: pwsh
         run: k6 version
 
       - name: Run k6 on event.js
-        shell: pwsh
         run: k6 run perfo/monitoring/event.js
