@@ -30,7 +30,6 @@ jobs:
       #    path: perfo/monitoring/event.js
 
       - name: Download k6 (Windows x64)
-        shell: pwsh
         run: |
           $K6_VERSION = "v1.2.3"
           $zip = "k6-$K6_VERSION-windows-amd64.zip"
